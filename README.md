@@ -12,8 +12,8 @@ best actions   — with a human in the loop.
 |---|---|
 |   Team name : Axon 
 |   Team size : 2 
-|   Members 1 : 1.Sriram Saideep (23071A1258 - IT) , email : saideepsriram2005@gmail.com , phone : 9177097582
-    Member 2  : Siddharth Reddy Gogula (23071A1212 - IT) , email : siddharthreddygogula123@gmail.com , phone : 8008904174
+|   Member 1 : 1.Sriram Saideep (23071A1258 - IT) , email : saideepsriram2005@gmail.com , phone : 9177097582
+|    Member 2  : Siddharth Reddy Gogula (23071A1212 - IT) , email : siddharthreddygogula123@gmail.com , phone : 8008904174
 |   GitHub   | https://github.com/Saiweb1718 |
 
 ---
