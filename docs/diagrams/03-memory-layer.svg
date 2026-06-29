@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t3 d3">
+  <title id="t3">Memory layer — vector + graph recall</title>
+  <desc id="d3">Writing a signal embeds it into a vector store and extracts entities into a knowledge graph. Recall embeds the query, does cosine top-k over the vector store, and graph-expands the account's risks to the playbooks that address them, merging both into ranked evidence. SQLite is the durable source of truth; the vector store and graph rebuild from it on boot.</desc>
+  <style>
+    svg{--paper:#ffffff;--ink:#1f2430;--mut:#6b7280;--bd:#dadde4;
+        --core:#efedff;--coreln:#6d5efc;--coreink:#3d34b8;
+        --mem:#e7f7f0;--memln:#10a37f;--memink:#0a7558;font-family:'Inter',system-ui,Arial,sans-serif;}
+    .mut{fill:var(--mut);}
+    .mbox{fill:var(--mem);stroke:var(--memln);stroke-width:1.3;} .mt{fill:var(--memink);font-weight:600;font-size:12.5px;}
+    .pbox{fill:var(--core);stroke:var(--coreln);stroke-width:1.3;} .pt{fill:var(--coreink);font-weight:600;font-size:12.5px;}
+    .nbox{fill:var(--paper);stroke:var(--bd);stroke-width:1.2;} .nt{fill:var(--ink);font-weight:600;font-size:12px;}
+    .ss{fill:var(--mut);font-size:10px;}
+    .gw{stroke:var(--memln);stroke-width:1.5;fill:none;} .pw{stroke:var(--coreln);stroke-width:1.4;fill:none;stroke-dasharray:5 4;}
+    .nw{stroke:var(--mut);stroke-width:1.3;fill:none;stroke-dasharray:3 3;}
+  </style>
+  <defs>
+    <marker id="gm" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="var(--memln)"/></marker>
+    <marker id="pm" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="var(--coreln)"/></marker>
+    <marker id="nm" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="var(--mut)"/></marker>
+  </defs>
+
+  <rect x="1" y="1" width="858" height="518" rx="14" fill="var(--paper)" stroke="var(--bd)"/>
+  <text x="30" y="36" fill="var(--ink)" font-size="20" font-weight="700">Memory Layer — vector + graph recall</text>
+  <text x="30" y="55" class="mut" font-size="12">Green = write/index path · Purple = recall path · everything is rebuilt from SQLite on boot.</text>
+
+  <rect x="28" y="92" width="150" height="48" rx="9" class="mbox"/><text x="103" y="113" text-anchor="middle" class="mt">remember(signal)</text><text x="103" y="128" text-anchor="middle" class="ss">a new interaction</text>
+
+  <rect x="210" y="80" width="150" height="38" rx="8" class="nbox"/><text x="285" y="98" text-anchor="middle" class="nt">Embedder</text><text x="285" y="111" text-anchor="middle" class="ss">text → 256-d vector</text>
+  <rect x="210" y="148" width="150" height="38" rx="8" class="nbox"/><text x="285" y="166" text-anchor="middle" class="nt">Entity extraction</text><text x="285" y="179" text-anchor="middle" class="ss">typed lexicon → nodes</text>
+
+  <rect x="396" y="74" width="200" height="50" rx="9" class="mbox"/><text x="496" y="95" text-anchor="middle" class="mt">Vector Store</text><text x="496" y="110" text-anchor="middle" class="ss">L2-normalized · cosine top-k</text>
+  <rect x="396" y="146" width="200" height="50" rx="9" class="mbox"/><text x="496" y="167" text-anchor="middle" class="mt">Knowledge Graph</text><text x="496" y="182" text-anchor="middle" class="ss">account · risk · stakeholder · playbook</text>
+
+  <path class="gw" d="M178,108 L210,99" marker-end="url(#gm)"/>
+  <path class="gw" d="M360,99 L396,99" marker-end="url(#gm)"/>
+  <path class="gw" d="M150,130 C180,150 185,167 210,167" marker-end="url(#gm)"/>
+  <path class="gw" d="M360,167 L396,170" marker-end="url(#gm)"/>
+
+  <rect x="672" y="96" width="158" height="74" rx="10" class="nbox"/><text x="751" y="124" text-anchor="middle" class="nt">Evidence[]</text><text x="751" y="140" text-anchor="middle" class="ss">ranked by score</text><text x="751" y="155" text-anchor="middle" class="ss">→ analyzer / recommender</text>
+  <path class="gw" d="M596,99 L672,116" marker-end="url(#gm)"/><text x="606" y="98" class="mt" font-size="9.5">cosine top-k</text>
+  <path class="gw" d="M596,171 L672,150" marker-end="url(#gm)"/><text x="600" y="190" class="mt" font-size="9.5">graph-expand: risk → playbook</text>
+
+  <rect x="28" y="300" width="150" height="48" rx="9" class="pbox"/><text x="103" y="321" text-anchor="middle" class="pt">recall(query)</text><text x="103" y="336" text-anchor="middle" class="ss">"what should I do?"</text>
+  <path class="pw" d="M178,312 C300,300 320,150 396,118" marker-end="url(#pm)"/><text x="250" y="250" class="pt" font-size="9.5">embed → search vectors</text>
+  <path class="pw" d="M178,330 C300,340 330,200 396,182" marker-end="url(#pm)"/><text x="250" y="320" class="pt" font-size="9.5">pull account's live entities</text>
+
+  <g>
+    <rect x="406" y="320" width="180" height="120" fill="var(--paper)" stroke="var(--memln)" stroke-width="1.3"/>
+    <ellipse cx="496" cy="320" rx="90" ry="14" fill="var(--paper)" stroke="var(--memln)" stroke-width="1.3"/>
+    <ellipse cx="496" cy="440" rx="90" ry="14" fill="var(--paper)" stroke="var(--memln)" stroke-width="1.3"/>
+    <text x="496" y="324" text-anchor="middle" class="mt" font-size="12.5">SQLite</text>
+    <text x="496" y="372" text-anchor="middle" class="ss">durable source of truth</text>
+    <text x="496" y="390" text-anchor="middle" class="ss">accounts · interactions</text>
+    <text x="496" y="406" text-anchor="middle" class="ss">decisions · recommendations</text>
+  </g>
+  <path class="nw" d="M450,320 L470,200" marker-end="url(#nm)"/>
+  <path class="nw" d="M470,318 L494,200" marker-end="url(#nm)"/>
+  <text x="395" y="250" class="mut" font-size="9.5" transform="rotate(-78 395 250)">rebuilt on boot</text>
+  <path class="gw" d="M120,140 C150,250 250,330 406,360" marker-end="url(#gm)"/><text x="150" y="300" class="mt" font-size="9.5">persist</text>
+
+  <rect x="628" y="300" width="210" height="64" rx="10" class="pbox"/><text x="733" y="322" text-anchor="middle" class="pt" font-size="11.5">Case memory (learning)</text><text x="733" y="338" text-anchor="middle" class="ss">each decision is embedded too →</text><text x="733" y="352" text-anchor="middle" class="ss">recall_decisions() feeds the ranker</text>
+</svg>

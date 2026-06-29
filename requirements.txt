@@ -1,0 +1,16 @@
+# Axon — backend dependencies (offline-capable, no torch)
+fastapi>=0.115
+uvicorn[standard]>=0.34
+pydantic>=2.0
+pyyaml>=6.0
+numpy>=1.26
+networkx>=3.0
+
+# LLM + embeddings (Gemini, supported SDK), config from .env
+google-genai>=0.3
+python-dotenv>=1.0
+
+# Optional / later:
+#   EMBED_PROVIDER=gemini  -> true semantic embeddings (uses GEMINI_API_KEY)
+#   langfuse>=2.0          -> LLM-Ops tracing (Phase 3)
+#   cognee                 -> CogneeMemory behind the same Memory interface (Cognee hackathon)

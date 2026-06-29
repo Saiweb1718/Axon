@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.DS_Store
+web/node_modules/
+web/dist/
+*.egg-info/
+/docs/ARCHITECTURE.md
+/docs/CONCEPTS.md
+/docs/DEMO_SCRIPT.md
+/docs/PRESENTATION_SCRIPT.md
+# runtime artifacts (rebuilt from seed data on boot)
+*.db
+axon.db

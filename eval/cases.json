@@ -1,0 +1,52 @@
+[
+  {
+    "id": "c1", "name": "Northwind (ROI risk)", "arr": 200000, "usage": "down 30% over the quarter",
+    "expected_action": "roi_review", "churn_prob_no_action": 0.32, "churn_prob_right_action": 0.08, "expansion_value": 0,
+    "interactions": [
+      {"kind": "meeting_note", "text": "CFO questioned ROI and cost justification ahead of renewal."},
+      {"kind": "crm_update", "text": "Renewal in 40 days; account flagged amber."},
+      {"kind": "usage", "text": "Usage dropped 30% this quarter; daily active users declining."}
+    ]
+  },
+  {
+    "id": "c2", "name": "Initech (adoption drop)", "arr": 90000, "usage": "down 25%",
+    "expected_action": "save_play", "churn_prob_no_action": 0.30, "churn_prob_right_action": 0.08, "expansion_value": 0,
+    "interactions": [
+      {"kind": "usage", "text": "Daily active users down 25%; adoption declining across teams."},
+      {"kind": "ticket", "text": "Several support tickets about confusion with the new workflow."}
+    ]
+  },
+  {
+    "id": "c3", "name": "Globex (expansion)", "arr": 120000, "usage": "high; 90% of seats",
+    "expected_action": "expansion", "churn_prob_no_action": 0.04, "churn_prob_right_action": 0.04, "expansion_value": 45000,
+    "interactions": [
+      {"kind": "crm_update", "text": "At 90% of licensed seats; power users requesting more access."},
+      {"kind": "email", "text": "Champion asked about volume pricing for adding new seats."}
+    ]
+  },
+  {
+    "id": "c4", "name": "Umbrella (growth)", "arr": 80000, "usage": "high; near seat limit",
+    "expected_action": "expansion", "churn_prob_no_action": 0.04, "churn_prob_right_action": 0.04, "expansion_value": 25000,
+    "interactions": [
+      {"kind": "meeting_note", "text": "Team plans to onboard two more sub-teams next quarter."},
+      {"kind": "crm_update", "text": "Near seat limit; more access requested by the analytics team."}
+    ]
+  },
+  {
+    "id": "c5", "name": "Stark (healthy)", "arr": 60000, "usage": "stable",
+    "expected_action": "monitor", "churn_prob_no_action": 0.04, "churn_prob_right_action": 0.04, "expansion_value": 0,
+    "interactions": [
+      {"kind": "meeting_note", "text": "Quarterly check-in went well; no concerns raised."},
+      {"kind": "usage", "text": "Usage steady and healthy."}
+    ]
+  },
+  {
+    "id": "c6", "name": "Wayne (sponsor turnover)", "arr": 150000, "usage": "stable",
+    "expected_action": "roi_review", "churn_prob_no_action": 0.32, "churn_prob_right_action": 0.10, "expansion_value": 0,
+    "label_note": "Hard case: churn driven by SPONSOR TURNOVER, not usage. The rules-based stub misses it (predicts monitor). A stronger LLM or an added 'sponsor change' rule would catch it — a deliberate, honest gap surfaced by the eval.",
+    "interactions": [
+      {"kind": "crm_update", "text": "Executive sponsor left the company; new stakeholder is unknown."},
+      {"kind": "meeting_note", "text": "New contact was non-committal about the upcoming renewal."}
+    ]
+  }
+]

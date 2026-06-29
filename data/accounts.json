@@ -1,0 +1,55 @@
+[
+  {
+    "id": "acme",
+    "name": "Acme Corp",
+    "arr": 200000,
+    "renewal": "2026-08-10",
+    "usage": "down 30% over the last 45 days; daily active users declining",
+    "industry": "Logistics SaaS",
+    "size": "520 employees",
+    "use_case": "workflow automation across operations teams",
+    "expected_action_keywords": ["ROI review", "value review", "economic buyer"],
+    "interactions": [
+      {"kind": "crm_update", "text": "Customer profile — Industry: Logistics SaaS. Company size: 520 employees. Primary use case: workflow automation across operations teams. Contract value: $200k ARR."},
+      {"kind": "meeting_note", "text": "QBR with Acme: their CFO is worried about ROI and whether the platform justifies the cost ahead of renewal."},
+      {"kind": "ticket", "text": "Support tickets from Acme spiked this month; several users reported confusion with the new workflow."},
+      {"kind": "crm_update", "text": "Acme renewal date set for 2026-08-10. Account flagged amber by the CSM."},
+      {"kind": "usage", "text": "Acme product usage dropped 30% over the last 45 days; daily active users declining."},
+      {"kind": "email", "text": "Champion at Acme emailed asking for a summary of value delivered this year for their finance team."}
+    ]
+  },
+  {
+    "id": "globex",
+    "name": "Globex Inc",
+    "arr": 120000,
+    "renewal": "2026-11-01",
+    "usage": "high; the analytics team is at 90% of their licensed seats",
+    "industry": "Analytics & BI",
+    "size": "300 employees",
+    "use_case": "self-serve analytics for data teams",
+    "expected_action_keywords": ["seat expansion", "expansion", "volume-pricing"],
+    "interactions": [
+      {"kind": "crm_update", "text": "Customer profile — Industry: Analytics & BI. Company size: 300 employees. Primary use case: self-serve analytics for data teams. Contract value: $120k ARR."},
+      {"kind": "meeting_note", "text": "Globex analytics team loves the product and mentioned onboarding two more sub-teams next quarter."},
+      {"kind": "crm_update", "text": "Globex is at 90% of their licensed seats; power users are requesting more access."},
+      {"kind": "email", "text": "Globex champion asked about volume pricing for adding a large group of new seats."}
+    ]
+  },
+  {
+    "id": "initech",
+    "name": "Initech",
+    "arr": 75000,
+    "renewal": "2027-02-01",
+    "usage": "steady; healthy weekly active users across teams",
+    "industry": "Fintech",
+    "size": "180 employees",
+    "use_case": "compliance reporting",
+    "expected_action_keywords": ["monitor", "no action"],
+    "interactions": [
+      {"kind": "crm_update", "text": "Customer profile — Industry: Fintech. Company size: 180 employees. Primary use case: compliance reporting. Contract value: $75k ARR."},
+      {"kind": "meeting_note", "text": "Initech QBR was positive; the team is happy and using core features consistently."},
+      {"kind": "usage", "text": "Initech usage is steady with healthy weekly active users across teams."},
+      {"kind": "crm_update", "text": "Initech account health is green; no concerns flagged this quarter and strong product fit."}
+    ]
+  }
+]

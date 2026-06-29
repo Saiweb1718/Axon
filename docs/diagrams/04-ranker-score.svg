@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 860 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t4 d4">
+  <title id="t4">Multi-factor NBA ranker score math</title>
+  <desc id="d4">The LLM scores each action on impact, urgency, confidence and effort (0 to 1). A weighted composite from the domain YAML (0.35, 0.30, 0.25, minus 0.10 for effort, divided by 0.90) gives a 0 to 1 score. Memory then multiplies by 0.45 if the action resembles a rejected one or 1.10 if approved. Acme's ROI review scores 0.856, which maps to HIGH priority.</desc>
+  <style>
+    svg{--paper:#ffffff;--ink:#1f2430;--mut:#6b7280;--bd:#dadde4;
+        --core:#efedff;--coreln:#6d5efc;--coreink:#3d34b8;
+        --grn:#10a37f;--amb:#c98a17;--red:#dc5b53;font-family:'Inter',system-ui,Arial,sans-serif;}
+    .mut{fill:var(--mut);} .ink{fill:var(--ink);}
+    .hd{fill:var(--mut);font-weight:700;font-size:10px;letter-spacing:1.2px;}
+    .fl{stroke:var(--mut);stroke-width:1.5;fill:none;}
+    .mono{font-family:'SFMono-Regular',Consolas,monospace;}
+  </style>
+  <defs><marker id="a4" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="var(--mut)"/></marker></defs>
+
+  <rect x="1" y="1" width="858" height="468" rx="14" fill="var(--paper)" stroke="var(--bd)"/>
+  <text x="30" y="36" class="ink" font-size="20" font-weight="700">Multi-Factor NBA Ranker — the priority score</text>
+  <text x="30" y="55" class="mut" font-size="12">Weights live in the domain YAML (tunable per domain). Worked example: Acme Corp's executive ROI review.</text>
+
+  <text x="30" y="90" class="hd">FACTORS — LLM SCORES EACH 0–1</text>
+  <g font-size="12.5">
+    <text x="34" y="116" class="ink" font-weight="600">impact</text>
+    <rect x="120" y="106" width="150" height="12" rx="6" fill="#eceaf6"/><rect x="120" y="106" width="135" height="12" rx="6" fill="var(--coreln)"/>
+    <text x="282" y="116" class="ink mono">0.90</text><rect x="320" y="105" width="44" height="16" rx="5" fill="var(--core)"/><text x="342" y="117" text-anchor="middle" class="mono" fill="var(--coreink)" font-size="10.5">×0.35</text>
+    <text x="34" y="152" class="ink" font-weight="600">urgency</text>
+    <rect x="120" y="142" width="150" height="12" rx="6" fill="#eceaf6"/><rect x="120" y="142" width="135" height="12" rx="6" fill="var(--coreln)"/>
+    <text x="282" y="152" class="ink mono">0.90</text><rect x="320" y="141" width="44" height="16" rx="5" fill="var(--core)"/><text x="342" y="153" text-anchor="middle" class="mono" fill="var(--coreink)" font-size="10.5">×0.30</text>
+    <text x="34" y="188" class="ink" font-weight="600">confidence</text>
+    <rect x="120" y="178" width="150" height="12" rx="6" fill="#eceaf6"/><rect x="120" y="178" width="129" height="12" rx="6" fill="var(--coreln)"/>
+    <text x="282" y="188" class="ink mono">0.86</text><rect x="320" y="177" width="44" height="16" rx="5" fill="var(--core)"/><text x="342" y="189" text-anchor="middle" class="mono" fill="var(--coreink)" font-size="10.5">×0.25</text>
+    <text x="34" y="224" class="ink" font-weight="600">effort</text>
+    <rect x="120" y="214" width="150" height="12" rx="6" fill="#f6eceb"/><rect x="120" y="214" width="45" height="12" rx="6" fill="var(--red)"/>
+    <text x="282" y="224" class="ink mono">0.30</text><rect x="318" y="213" width="48" height="16" rx="5" fill="#f6eceb"/><text x="342" y="225" text-anchor="middle" class="mono" fill="var(--red)" font-size="10.5">−0.10</text>
+  </g>
+  <text x="34" y="250" class="mut" font-size="10">effort subtracts — cheaper actions win when impact ties</text>
+  <path class="fl" d="M372,165 L408,165" marker-end="url(#a4)"/>
+
+  <rect x="412" y="92" width="300" height="120" rx="10" fill="var(--paper)" stroke="var(--bd)"/>
+  <text x="428" y="114" class="hd">WEIGHTED COMPOSITE</text>
+  <text x="428" y="138" class="mono ink" font-size="12.5">(0.35·0.90 + 0.30·0.90</text>
+  <text x="428" y="156" class="mono ink" font-size="12.5"> + 0.25·0.86 − 0.10·0.30)</text>
+  <text x="428" y="178" class="mono mut" font-size="11.5">÷ 0.90   (sum of + weights)</text>
+  <line x1="428" y1="188" x2="696" y2="188" stroke="var(--bd)"/>
+  <text x="428" y="206" class="mono ink" font-size="13" font-weight="600">= 0.77 ÷ 0.90 = 0.856</text>
+
+  <path class="fl" d="M562,212 L562,236" marker-end="url(#a4)"/>
+  <rect x="412" y="238" width="300" height="58" rx="10" fill="var(--paper)" stroke="var(--bd)"/>
+  <text x="428" y="258" class="hd">× MEMORY ADJUSTMENT</text>
+  <text x="428" y="278" class="mono" font-size="11.5" fill="var(--red)">resembles a REJECTED action → × 0.45</text>
+  <text x="428" y="292" class="mono" font-size="11.5" fill="var(--grn)">resembles an APPROVED action → × 1.10</text>
+  <path class="fl" d="M712,165 L744,165" marker-end="url(#a4)"/>
+
+  <text x="748" y="90" class="hd">RESULT</text>
+  <rect x="744" y="100" width="92" height="56" rx="10" fill="var(--core)" stroke="var(--coreln)" stroke-width="1.3"/>
+  <text x="790" y="132" text-anchor="middle" class="mono" fill="var(--coreink)" font-size="22" font-weight="700">0.86</text>
+  <text x="790" y="148" text-anchor="middle" class="mut" font-size="9">priority score</text>
+
+  <text x="748" y="186" class="hd">PRIORITY TIERS</text>
+  <rect x="744" y="196" width="92" height="26" rx="6" fill="#e7f4ee" stroke="var(--grn)"/><text x="790" y="213" text-anchor="middle" class="mono" fill="var(--grn)" font-size="11">HIGH ≥ 0.70</text>
+  <rect x="744" y="228" width="92" height="26" rx="6" fill="#faf1de" stroke="var(--amb)"/><text x="790" y="245" text-anchor="middle" class="mono" fill="var(--amb)" font-size="11">MED ≥ 0.45</text>
+  <rect x="744" y="260" width="92" height="26" rx="6" fill="#f1f1f2" stroke="var(--mut)"/><text x="790" y="277" text-anchor="middle" class="mono" fill="var(--mut)" font-size="11">LOW &lt; 0.45</text>
+  <path class="fl" d="M790,156 L790,196" marker-end="url(#a4)"/>
+
+  <rect x="30" y="320" width="806" height="48" rx="10" fill="var(--core)" stroke="var(--coreln)" stroke-width="1.1"/>
+  <text x="48" y="342" fill="var(--coreink)" font-weight="600" font-size="12.5">Why this matters:</text>
+  <text x="48" y="359" class="mut" font-size="11.5">it's transparent (every number is shown), configurable (weights in YAML), and memory-aware (rejecting an action down-ranks it next time) — a defensible decision, not a black box.</text>
+</svg>

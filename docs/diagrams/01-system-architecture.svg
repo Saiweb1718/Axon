@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ttl dsc">
+  <title id="ttl">Axon system architecture</title>
+  <desc id="dsc">Layered architecture: React UI, FastAPI, Planner/Orchestrator, six agents, the memory layer over SQLite, and foundations (LLM, config, integrations). Requests flow top to bottom; the human-in-the-loop returns on the right.</desc>
+  <style>
+    svg{--paper:#ffffff;--ink:#1f2430;--mut:#6b7280;--bd:#dadde4;--band:#f6f7f9;
+        --core:#efedff;--coreln:#6d5efc;--coreink:#3d34b8;
+        --mem:#e7f7f0;--memln:#10a37f;--memink:#0a7558;font-family:'Inter',system-ui,Arial,sans-serif;}
+    .ink{fill:var(--ink);} .mut{fill:var(--mut);}
+    .box{fill:var(--paper);stroke:var(--bd);stroke-width:1.2;}
+    .bt{fill:var(--ink);font-weight:600;font-size:12.5px;} .bs{fill:var(--mut);font-size:10px;}
+    .tier{fill:var(--mut);font-weight:700;font-size:10px;letter-spacing:1.3px;}
+    .core{fill:var(--core);stroke:var(--coreln);stroke-width:1.3;} .coret{fill:var(--coreink);font-weight:600;font-size:12.5px;}
+    .mem{fill:var(--mem);stroke:var(--memln);stroke-width:1.3;} .memt{fill:var(--memink);font-weight:600;font-size:12.5px;}
+    .fl{stroke:var(--mut);stroke-width:1.4;fill:none;} .hl{stroke:var(--coreln);stroke-width:1.4;fill:none;stroke-dasharray:5 4;}
+  </style>
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="var(--mut)"/></marker>
+    <marker id="ha" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto"><path d="M0,0 L6.5,3 L0,6 Z" fill="var(--coreln)"/></marker>
+  </defs>
+
+  <rect x="1" y="1" width="958" height="598" rx="14" fill="var(--paper)" stroke="var(--bd)"/>
+  <text x="34" y="40" class="ink" font-size="21" font-weight="700">Axon — System Architecture</text>
+  <text x="34" y="59" class="mut" font-size="12">Reusable agentic decision-intelligence platform · request flows top → down · human-in-the-loop returns on the right</text>
+  <rect x="690" y="28" width="13" height="13" rx="3" class="core"/><text x="708" y="39" class="mut" font-size="10.5">Agentic core</text>
+  <rect x="800" y="28" width="13" height="13" rx="3" class="mem"/><text x="818" y="39" class="mut" font-size="10.5">Memory / data</text>
+
+  <text x="40" y="88" class="tier">EXPERIENCE — REACT UI</text>
+  <g>
+    <rect x="43" y="94" width="205" height="48" rx="8" class="box"/><text x="145" y="116" text-anchor="middle" class="bt">Portfolio</text><text x="145" y="131" text-anchor="middle" class="bs">KPIs · add customer</text>
+    <rect x="266" y="94" width="205" height="48" rx="8" class="box"/><text x="368" y="116" text-anchor="middle" class="bt">Account Workspace</text><text x="368" y="131" text-anchor="middle" class="bs">timeline · run · approve</text>
+    <rect x="489" y="94" width="205" height="48" rx="8" class="box"/><text x="591" y="116" text-anchor="middle" class="bt">Memory Explorer</text><text x="591" y="131" text-anchor="middle" class="bs">graph · semantic search</text>
+    <rect x="712" y="94" width="205" height="48" rx="8" class="box"/><text x="814" y="116" text-anchor="middle" class="bt">Evaluation</text><text x="814" y="131" text-anchor="middle" class="bs">top-1 · MRR · learning</text>
+  </g>
+  <path class="fl" d="M480,142 L480,168" marker-end="url(#a)"/>
+
+  <text x="40" y="166" class="tier">API — FASTAPI :8000</text>
+  <g>
+    <rect x="43" y="172" width="205" height="44" rx="8" class="box"/><text x="145" y="192" text-anchor="middle" class="bt">POST /recommend</text><text x="145" y="206" text-anchor="middle" class="bs">plan → ranked actions</text>
+    <rect x="266" y="172" width="205" height="44" rx="8" class="box"/><text x="368" y="192" text-anchor="middle" class="bt">POST /decision</text><text x="368" y="206" text-anchor="middle" class="bs">HITL → learn + execute</text>
+    <rect x="489" y="172" width="205" height="44" rx="8" class="box"/><text x="591" y="192" text-anchor="middle" class="bt">POST /ingest</text><text x="591" y="206" text-anchor="middle" class="bs">remember signals</text>
+    <rect x="712" y="172" width="205" height="44" rx="8" class="box"/><text x="814" y="192" text-anchor="middle" class="bt">GET /memory · /eval</text><text x="814" y="206" text-anchor="middle" class="bs">graph · search · score</text>
+  </g>
+  <path class="fl" d="M480,216 L480,240" marker-end="url(#a)"/>
+
+  <text x="40" y="238" class="tier">ORCHESTRATION  (raw — no framework)</text>
+  <g>
+    <rect x="200" y="244" width="260" height="52" rx="9" class="core"/><text x="330" y="266" text-anchor="middle" class="coret">Planner</text><text x="330" y="282" text-anchor="middle" class="bs">reads registry → chooses agents</text>
+    <rect x="500" y="244" width="260" height="52" rx="9" class="core"/><text x="630" y="266" text-anchor="middle" class="coret">Orchestrator</text><text x="630" y="282" text-anchor="middle" class="bs">runs plan · re-plans on gaps</text>
+    <path class="hl" d="M760,256 C815,256 815,300 760,300 L632,300" marker-end="url(#ha)"/>
+    <text x="772" y="280" class="coret" font-size="9.5">re-plan ↺</text>
+    <path class="fl" d="M460,270 L500,270" marker-end="url(#a)"/>
+  </g>
+  <path class="fl" d="M480,296 L480,320" marker-end="url(#a)"/>
+
+  <text x="40" y="318" class="tier">AGENTS — REUSABLE REGISTRY (drop a class, register, done)</text>
+  <g>
+    <rect x="51" y="324" width="133" height="46" rx="8" class="core"/><text x="117" y="346" text-anchor="middle" class="coret" font-size="11.5">ingestion</text><text x="117" y="359" text-anchor="middle" class="bs">normalize</text>
+    <rect x="196" y="324" width="133" height="46" rx="8" class="core"/><text x="262" y="346" text-anchor="middle" class="coret" font-size="11.5">retrieval</text><text x="262" y="359" text-anchor="middle" class="bs">recall (RAG)</text>
+    <rect x="341" y="324" width="133" height="46" rx="8" class="core"/><text x="407" y="346" text-anchor="middle" class="coret" font-size="11.5">analyzer</text><text x="407" y="359" text-anchor="middle" class="bs">findings</text>
+    <rect x="486" y="324" width="133" height="46" rx="8" class="core"/><text x="552" y="346" text-anchor="middle" class="coret" font-size="11.5">recommender</text><text x="552" y="359" text-anchor="middle" class="bs">rank</text>
+    <rect x="631" y="324" width="133" height="46" rx="8" class="core"/><text x="697" y="346" text-anchor="middle" class="coret" font-size="11.5">explainer</text><text x="697" y="359" text-anchor="middle" class="bs">evidence</text>
+    <rect x="776" y="324" width="133" height="46" rx="8" class="core"/><text x="842" y="346" text-anchor="middle" class="coret" font-size="11.5">execution</text><text x="842" y="359" text-anchor="middle" class="bs">draft action</text>
+  </g>
+  <path class="fl" d="M480,370 L480,392" marker-end="url(#a)"/>
+  <text x="496" y="384" class="mut" font-size="9.5">read / write</text>
+
+  <text x="40" y="390" class="tier">MEMORY LAYER  (interface: remember · recall · improve · forget)</text>
+  <g>
+    <rect x="40" y="396" width="280" height="50" rx="8" class="mem"/><text x="180" y="416" text-anchor="middle" class="memt">Embeddings + Vector Store</text><text x="180" y="431" text-anchor="middle" class="bs">cosine semantic recall</text>
+    <rect x="340" y="396" width="280" height="50" rx="8" class="mem"/><text x="480" y="416" text-anchor="middle" class="memt">Knowledge Graph</text><text x="480" y="431" text-anchor="middle" class="bs">entities · relations · expansion</text>
+    <rect x="640" y="396" width="280" height="50" rx="8" class="mem"/><text x="780" y="416" text-anchor="middle" class="memt">Decision (Case) Memory</text><text x="780" y="431" text-anchor="middle" class="bs">learns from feedback</text>
+    <rect x="40" y="454" width="880" height="28" rx="7" fill="var(--paper)" stroke="var(--memln)" stroke-width="1.3"/>
+    <text x="480" y="472" text-anchor="middle" class="memt" font-size="11.5">SQLite — durable source of truth</text>
+    <text x="800" y="472" class="bs">↑ vectors + graph rebuilt on boot</text>
+  </g>
+  <path class="fl" d="M480,482 L480,506" marker-end="url(#a)"/>
+
+  <text x="40" y="504" class="tier">FOUNDATIONS  (swap behind interfaces — no engine change)</text>
+  <g>
+    <rect x="40" y="510" width="280" height="44" rx="8" class="box"/><text x="180" y="530" text-anchor="middle" class="bt">LLM Provider</text><text x="180" y="544" text-anchor="middle" class="bs">Gemini ↔ deterministic stub</text>
+    <rect x="340" y="510" width="280" height="44" rx="8" class="box"/><text x="480" y="530" text-anchor="middle" class="bt">Config — YAML domain pack</text><text x="480" y="544" text-anchor="middle" class="bs">personas · weights · metrics</text>
+    <rect x="640" y="510" width="280" height="44" rx="8" class="box"/><text x="780" y="530" text-anchor="middle" class="bt">Integrations</text><text x="780" y="544" text-anchor="middle" class="bs">Gmail draft (IMAP)</text>
+  </g>
+
+  <path class="hl" d="M922,118 C946,118 946,200 922,200" marker-end="url(#ha)"/>
+  <text x="900" y="160" class="coret" font-size="9.5" transform="rotate(90 900 160)">human-in-the-loop</text>
+</svg>

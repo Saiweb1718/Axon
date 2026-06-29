@@ -1,0 +1,37 @@
+[
+  {
+    "id": "pb_churn",
+    "title": "Usage-Decline Save Play",
+    "body": "When an account shows declining adoption near renewal, run a re-onboarding session, re-engage the executive sponsor, and schedule a value review focused on ROI. Escalate to the CS lead if the account is high ARR."
+  },
+  {
+    "id": "pb_roi",
+    "title": "Executive Value Review Playbook",
+    "body": "For stakeholders doubting ROI or cost justification, prepare a value summary (outcomes delivered, time saved, adoption) and host an executive value review with the economic buyer before renewal."
+  },
+  {
+    "id": "pb_expansion",
+    "title": "Seat Expansion Playbook",
+    "body": "When a team reaches high seat utilisation (near the licensed limit) or requests more access, proactively propose a seat expansion or higher tier. Offer volume pricing to champions planning to add sub-teams."
+  },
+  {
+    "id": "pb_ebr",
+    "title": "Executive Business Review Cadence",
+    "body": "Hold an Executive Business Review at least every quarter for strategic accounts to align on goals, demonstrate value, and surface expansion opportunities."
+  },
+  {
+    "id": "bp_signals",
+    "title": "Best Practice: Early Churn Signals",
+    "body": "Leading churn indicators include declining active users, support ticket spikes, sponsor turnover, and negative ROI sentiment. Act within three days of detection."
+  },
+  {
+    "id": "doc_product",
+    "title": "Product Docs: Capabilities & Limits",
+    "body": "The platform supports SSO, role-based access, an analytics dashboard, and a public API with webhooks. Known limits: no offline mode; bulk export capped at 50k rows; SAML requires the Enterprise tier."
+  },
+  {
+    "id": "doc_integrations",
+    "title": "Product Docs: Integrations",
+    "body": "Native integrations include Salesforce, HubSpot, Slack, and Zapier. The REST API enables custom integrations; rate limits are 600 requests/minute on Pro and 6000 on Enterprise."
+  }
+]

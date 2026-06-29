@@ -1,0 +1,59 @@
+
+domain: customer_success
+description: >
+  B2B SaaS Customer Success — retain and grow existing accounts by acting on
+  early churn signals and expansion opportunities.
+
+personas:
+  - id: csm
+    name: Customer Success Manager
+    goal: Prevent churn and grow the accounts they own.
+  - id: cs_lead
+    name: CS Team Lead
+    goal: Oversee portfolio health and step in on high-risk accounts.
+
+# Configurable business rules the recommender reasons against.
+decision_policies:
+  - id: churn_risk
+    when: usage decline AND renewal within 60 days
+    prefer: [executive value review, usage-decline save play]
+    weight: 1.0
+  - id: expansion
+    when: near seat or licence limit
+    prefer: [seat expansion, upsell premium tier]
+    weight: 0.8
+  - id: hygiene
+    when: no executive business review in 90 days
+    prefer: [schedule executive business review]
+    weight: 0.4
+
+thresholds:
+  usage_drop_pct: 25
+  renewal_window_days: 60
+  high_confidence: 0.75
+
+# Multi-factor Next-Best-Action ranker. These weights are the prioritisation
+# "business brain" — tune per domain without touching engine code.
+ranker:
+  weights:
+    impact: 0.35        
+    urgency: 0.30       
+    confidence: 0.25    
+    effort: 0.10        
+  priority_thresholds:
+    high: 0.70
+    medium: 0.45
+  learned:
+    rejected_penalty: 0.45   
+    approved_boost: 1.10    
+
+# Drives the 30% "measurable business outcomes" story + the eval harness.
+success_metrics:
+  - name: Net Revenue Retention
+    target: ">= 110%"
+  - name: Gross churn
+    target: "<= 8%"
+  - name: Recommendation acceptance rate
+    target: ">= 60%"
+  - name: Time-to-action on flagged risks
+    target: "<= 3 days"

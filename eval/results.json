@@ -1,0 +1,8 @@
+{
+  "nba_top1_accuracy": 0.833,
+  "accounts_evaluated": 6,
+  "nrr_baseline_pct": 78.7,
+  "nrr_platform_pct": 98.3,
+  "churn_dollars_prevented": 67800,
+  "expansion_dollars_captured": 70000
+}
