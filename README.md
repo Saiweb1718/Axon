@@ -125,5 +125,5 @@ for the minute-by-minute demo + architecture walkthrough.
 ## Extending it (the reusability story)
 - **New agent:** add a class in `app/agents/`, `register()` it, import it in `__init__.py` — the planner uses it immediately (it shows up in `GET /agents`).
 - **New domain:** add a YAML in `config/` + seed `data/`. The engine never hardcodes "churn".
-- **Real models:** set `GEMINI_API_KEY`, `LLM_PROVIDER=gemini`, `EMBED_PROVIDER=gemini`.
+- **Real models:** set `GEMINI_API_KEY  `, `LLM_PROVIDER=gemini`, `EMBED_PROVIDER=gemini`.
 - **Cognee (Phase 2):** implement `CogneeMemory(Memory)` and construct it instead of `SemanticMemory` — agents don't change.
