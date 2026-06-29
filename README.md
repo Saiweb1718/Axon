@@ -109,21 +109,4 @@ platform recommends **restraint**, not a busy-work action. Numbers are reproduci
 
 ---
 
-## Demo script (5 min)
-1. **Portfolio** → add a customer; see KPIs + the 5 reusable agents.
-2. **Account** → *Run next best actions* on Acme → ranked actions with confidence + evidence + the plan + reasoning trace.
-3. **Reject** the save-play → it re-runs and the action is **down-ranked** (memory learned).
-4. **Memory Explorer** → the 48-node knowledge graph + semantic search over memory.
-5. **Evaluation** → top-1 accuracy, MRR, and the learning check.
 
-See **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** for the design, **[docs/CONCEPTS.md](docs/CONCEPTS.md)**
-to learn the ideas from scratch (so you can rebuild it yourself), and **[docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md)**
-for the minute-by-minute demo + architecture walkthrough.
-
----
-
-## Extending it (the reusability story)
-- **New agent:** add a class in `app/agents/`, `register()` it, import it in `__init__.py` — the planner uses it immediately (it shows up in `GET /agents`).
-- **New domain:** add a YAML in `config/` + seed `data/`. The engine never hardcodes "churn".
-- **Real models:** set `GEMINI_API_KEY  `, `LLM_PROVIDER=gemini`, `EMBED_PROVIDER=gemini`.
-- **Cognee (Phase 2):** implement `CogneeMemory(Memory)` and construct it instead of `SemanticMemory` — agents don't change.
