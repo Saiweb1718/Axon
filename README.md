@@ -1,129 +1,118 @@
 # Axon — Intelligent Next Best Action Platform
 
-A **reusable agentic decision-intelligence platform**. A dynamic **Planner** orchestrates
-specialized agents over a real **memory layer** (semantic vector recall **+** a knowledge
-graph **+** SQLite persistence **+** case-based learning) to turn customer interactions and
-enterprise knowledge into **explainable next best actions** — with a human in the loop.
-
-The engine is **domain-agnostic**; the demo runs a **B2B SaaS Customer Success** use case
-(prevent churn, find expansion). Swap `config/` + `data/` to point the same engine at a new domain.
-
-> Runs fully **offline** — no API key, no GPU, no torch. Real LLM (Gemini) and real
-> transformer embeddings are drop-in upgrades behind the same interfaces.
+A   reusable agentic decision-intelligence platform  : a dynamic   Planner   orchestrates specialized
+agents over a real   memory layer   (semantic vector recall + a knowledge graph + SQLite persistence +
+case-based learning) to turn customer interactions and enterprise knowledge into   explainable next
+best actions   — with a human in the loop.
 
 ---
 
-## What makes it real 
-
-| Capability | How it's implemented |
+## 1. Team
+| | |
 |---|---|
-| **Dynamic planner orchestration** | `planner.py` asks the LLM to choose agents from the registry; `orchestrator.py` **re-plans** when an agent flags missing info |
-| **Reusable agents + tools** | `agents/` — drop a class in, `register()` it, the planner discovers it via the manifest. No engine change |
-| **Semantic memory** | `memory/embeddings.py` + `vectorstore.py` — embeddings + cosine recall (not keyword matching) |
-| **Knowledge graph** | `memory/graph.py` — entities/relationships per account + org-wide; **graph-expansion** recall pulls the playbook that *addresses* a matched risk |
-| **Persistence** | `memory/store.py` — SQLite; accounts/interactions/decisions/recs survive restarts; vectors+graph rebuilt from it |
-| **Case-based learning** | every human decision is embedded; `recall_decisions` surfaces how similar situations were handled, and rejected actions are down-ranked |
-| **Explainability** | each recommendation carries confidence, a reasoning trace, and evidence citations back into memory |
-| **Human-in-the-loop** | approve / edit / reject in the UI → `memory.improve` → the next run visibly changes |
-| **Evaluation** | `evaluate.py` — top-1 accuracy, MRR, and a before/after learning check on a clean store |
+|   Team name : Axon 
+|   Team size : 2 
+|   Members   : 1.Sriram Saideep (23071A1258 - IT) , email : saideepsriram2005@gmail.com , phone : 9177097582
+                2.Siddharth Reddy Gogula (23071A1212 - IT) , email : siddharthreddygogula123@gmail.com , phone : 8008904174
+|   GitHub   | https://github.com/Saiweb1718 |
 
 ---
 
-## Quickstart
+## 2. Project overview
 
-**Backend** (Python 3.11+):
-```bash
-cd axon
-python -m venv .venv && .venv\Scripts\activate      # Windows  (mac/linux: source .venv/bin/activate)
-pip install -r requirements.txt
-uvicorn app.main:app --reload                        # http://127.0.0.1:8000  (/docs for OpenAPI)
-```
+  The problem.   In B2B SaaS Customer Success, one manager owns 40+ accounts worth millions. Signals
+arrive constantly — meetings, emails, support tickets, usage data — and no human can reason over all
+of it for every account, every day. So   churn is caught too late and expansion is missed.  
 
-**Frontend** (Node 18+):
-```bash
-cd axon/web
-npm install
-npm run dev                                          # http://localhost:5173
-```
+  What Axon does.   For any account it ingests the interactions, gathers the organization's knowledge,
+analyzes the situation,   recommends ranked next best actions  , explains each with evidence and
+confidence, lets a human   approve/edit/reject  ,   drafts the action   (a real Gmail draft), and
+  learns   from the decision. It is a  platform that decides  — not a chatbot or a RAG app.
 
-**Verify with no server and no keys:**
-```bash
-python smoke.py            # full pipeline + the learning loop, fully offline
-python -m app.evaluate     # measurable outcomes (top-1, MRR, learning check)
-```
+  Reusable by design.   The engine is   domain-agnostic   — nothing in `app/` hardcodes "churn." The
+entire Customer Success use case lives in `config/customer_success.yaml` + `data/`. Swap those and the
+same Planner, agents, and memory run Sales, Staffing, Energy, etc.
 
----
+  Capabilities  
+| Capability | How |
+|---|---|
+| Dynamic planner orchestration | `planner.py` selects agents from a registry; `orchestrator.py`   re-plans   when info is missing |
+| Reusable agents (6) | ingestion · retrieval · analyzer · recommender · explainer · execution — drop a class, `register()`, done |
+| Semantic memory | embeddings + cosine recall (not keyword matching) |
+| Knowledge graph | entities/relationships +   graph-expansion   (a risk pulls in the playbook that addresses it) |
+| Case-based learning | every human decision is embedded; rejected actions are down-ranked next time |
+| Explainability | confidence, structured findings, and evidence citations back into memory |
+| Human-in-the-loop → execution | approve/edit/reject → drafts a real   Gmail draft   (never auto-sends) |
+| Evaluation | `evaluate.py` — top-1 accuracy, MRR, and a before/after learning check |
 
-## The platform in one picture
+  Measured outcomes   (`python -m app.evaluate`, reproducible/offline):   top-1 accuracy 100%  ,
+  MRR 1.0  ,   learns from feedback: yes   — including a healthy account where the correct answer is
+"continue monitoring" (the platform shows restraint).
 
 ```
  Experience    React UI:  Portfolio · Account workspace · Memory Explorer · Evaluation
-                                          │ REST
- Orchestration PLANNER ──► plan (which agents, what order) ──► RE-plan on missing info
-                                          │
- Agents        ingestion · retrieval · analyzer · recommender · explainer   (registry)
-                                          │
- Memory        Embeddings + VectorStore   |   KnowledgeGraph   |   Decision (case) memory
-               └──────────────  SQLite  (durable source of truth)  ──────────────┘
-                                          │
- Config        config/customer_success.yaml  +  data/   (swap to change domain)
-```
-
-Two interfaces are the backbone — everything depends on these, never on a vendor:
-
-```python
-class LLMProvider:        complete(system, prompt) -> str      # stub ↔ Gemini ↔ Claude
-class EmbeddingProvider:  embed(text) -> vector                # hash-local ↔ Gemini
-class Memory:             remember · recall · improve · forget # SemanticMemory ↔ Cognee
+ Orchestration PLANNER ──► plan (which agents) ──► RE-plan on missing info
+ Agents        ingestion · retrieval · analyzer · recommender · explainer · execution   (registry)
+ Memory        Embeddings + VectorStore | KnowledgeGraph | Decision (case) memory
+               └────────────── SQLite (durable source of truth) ──────────────┘
+ Config        config/customer_success.yaml + data/   (swap to change domain)
 ```
 
 ---
 
-## API
+## 3. GitHub repository
 
-| Method | Path | Purpose |
-|---|---|---|
-| GET | `/health` | liveness + active LLM/embedding providers |
-| GET | `/agents` | the reusable agent catalogue (registry) |
-| GET | `/accounts` · POST `/accounts` | portfolio summary · create a customer |
-| GET | `/accounts/{id}` · `/accounts/{id}/memory` | timeline + decisions · per-account graph |
-| GET | `/memory/graph` · POST `/memory/search` | knowledge graph · semantic recall |
-| POST | `/ingest` | remember interactions (auto-creates the account) |
-| POST | `/recommend` · `/decision` | planner → next best actions · human-in-the-loop |
-| GET | `/eval` | run the evaluation harness |
+  https://github.com/Saiweb1718  
 
 ---
 
-## Measured outcomes (`python -m app.evaluate`)
+## 4. Setup instructions
 
-Replays the labelled seed portfolio through the **full** platform on a clean, in-memory store:
+  Backend   (Python 3.11+):
+```bash
+cd axon
+python -m venv .venv
+.venv\Scripts\activate                 # Windows   (mac/linux: source .venv/bin/activate)
+pip install -r requirements.txt
+uvicorn app.main:app --reload          # → http://127.0.0.1:8000   (/docs for OpenAPI)
+```
 
-| Metric | Result |
-|---|---|
-| Top-1 next-best-action accuracy | **100%** (3/3 labelled cases) |
-| Mean reciprocal rank (MRR) | **1.0** |
-| Learns from feedback | **Yes** — after a rejection the top recommendation changes |
+  Frontend   (Node 18+):
+```bash
+cd axon/web
+npm install
+npm run dev                            # → http://localhost:5173
+```
 
-The cases include a **healthy** account whose correct answer is *"continue monitoring"* — the
-platform recommends **restraint**, not a busy-work action. Numbers are reproducible offline.
+  Run with no server and no keys   (fully offline, deterministic):
+```bash
+python smoke.py            # full pipeline + the learning loop
+python -m app.evaluate     # measurable outcomes (top-1, MRR, learning)
+```
+
+  Optional `.env`   (copy from `.env.example`; the app runs offline without it):
+```bash
+GEMINI_API_KEY=...         # enables real Gemini reasoning (LLM_PROVIDER=auto picks it up)
+EMBED_PROVIDER=gemini      # optional: true semantic embeddings (default is the offline hash embedder)
+GMAIL_ADDRESS=you@gmail.com        # optional: Approve → real Gmail draft (IMAP App Password)
+GMAIL_APP_PASSWORD=xxxxxxxxxxxxxxxx
+```
 
 ---
 
-## Demo script (5 min)
-1. **Portfolio** → add a customer; see KPIs + the 5 reusable agents.
-2. **Account** → *Run next best actions* on Acme → ranked actions with confidence + evidence + the plan + reasoning trace.
-3. **Reject** the save-play → it re-runs and the action is **down-ranked** (memory learned).
-4. **Memory Explorer** → the 48-node knowledge graph + semantic search over memory.
-5. **Evaluation** → top-1 accuracy, MRR, and the learning check.
+## 5. Additional notes
 
-See **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** for the design, **[docs/CONCEPTS.md](docs/CONCEPTS.md)**
-to learn the ideas from scratch (so you can rebuild it yourself), and **[docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md)**
-for the minute-by-minute demo + architecture walkthrough.
-
----
-
-## Extending it (the reusability story)
-- **New agent:** add a class in `app/agents/`, `register()` it, import it in `__init__.py` — the planner uses it immediately (it shows up in `GET /agents`).
-- **New domain:** add a YAML in `config/` + seed `data/`. The engine never hardcodes "churn".
-- **Real models:** set `GEMINI_API_KEY`, `LLM_PROVIDER=gemini`, `EMBED_PROVIDER=gemini`.
-- **Cognee (Phase 2):** implement `CogneeMemory(Memory)` and construct it instead of `SemanticMemory` — agents don't change.
+-   Offline-first & resilient.   With no key it runs on a deterministic stub; with a key it uses
+    Gemini 2.5 Flash   (thinking disabled for speed). On any quota/error it   falls back to the stub
+  per-call  , so a demo never breaks mid-recording.
+-   Gemini free-tier quota   is small (~per-model daily cap). For heavy testing, enable billing on the
+  Google project — `gemini-flash` is very cheap. The app degrades gracefully if quota runs out.
+-   Gmail drafts   use IMAP + a Google   App Password   (Security → 2-Step Verification → App
+  passwords; enable IMAP in Gmail). It only   drafts   — it never sends.
+-   Persistence:   SQLite (`axon.db`) is the source of truth; the vector store and graph are rebuilt
+  from it on boot. `axon.db`, `.venv`, `node_modules`, and `.env` are gitignored.
+-   Docs:   [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) (design), [`docs/CONCEPTS.md`](docs/CONCEPTS.md)
+  (learn/rebuild it from scratch), [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md) (video script),
+  [`docs/diagrams/`](docs/diagrams/) (architecture SVGs).
+-   Roadmap:   a `CogneeMemory` backend (the `Memory` method names mirror Cognee's lifecycle) and
+  Postgres + pgvector for scale — both drop in behind existing interfaces, no agent changes.
