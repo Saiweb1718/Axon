@@ -100,6 +100,7 @@ GMAIL_APP_PASSWORD=xxxxxxxxxxxxxxxx
 
 ---
 
+<<<<<<< HEAD
 ## 5. Additional notes
 
 -   Offline-first & resilient.   With no key it runs on a deterministic stub; with a key it uses
@@ -116,3 +117,6 @@ GMAIL_APP_PASSWORD=xxxxxxxxxxxxxxxx
   [`docs/diagrams/`](docs/diagrams/) (architecture SVGs).
 -   Roadmap:   a `CogneeMemory` backend (the `Memory` method names mirror Cognee's lifecycle) and
   Postgres + pgvector for scale — both drop in behind existing interfaces, no agent changes.
+=======
+
+>>>>>>> 228f64d046e66095e89cbeaf4328f2b18bfef3bd
